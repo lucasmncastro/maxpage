@@ -21,7 +21,7 @@ module Maxdog
     end
 
     def ok?
-      return if not verify?
+      return true if not verify?
 
       run if not value
 
