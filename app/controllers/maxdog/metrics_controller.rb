@@ -1,5 +1,7 @@
 module Maxdog
   class MetricsController < ApplicationController
+    layout 'maxdog/application'
+
     def index
       @title = Maxdog.config.title
       @metrics = Maxdog.config.metrics
