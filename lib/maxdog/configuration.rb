@@ -14,10 +14,11 @@ module Maxdog
     end
 
     # Add a metric.
-    def metric(name, description: nil, &block)
+    def metric(name, description: nil, verify: nil, &block)
       metric = Metric.new
       metric.name = name
       metric.description = description
+      metric.verify = verify
       metric.block = block
 
       @metrics << metric
