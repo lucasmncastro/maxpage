@@ -13,6 +13,20 @@ class MaxdogTest < ActiveSupport::TestCase
     assert_equal 'Status page', Maxdog.config.title
   end
 
+  test "success message" do
+    Maxdog.setup do
+      success_message 'Tudo certo'
+    end
+    assert_equal 'Tudo certo', Maxdog.config.success_message
+  end
+
+  test "warning message" do
+    Maxdog.setup do
+      warning_message 'Deu ruim'
+    end
+    assert_equal 'Deu ruim', Maxdog.config.warning_message
+  end
+
   test "simple metric" do
     Maxdog.setup do
       metric "Today's sales" do

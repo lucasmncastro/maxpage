@@ -1,11 +1,7 @@
 <div class="<%= @alright ? 'bg-success' : 'bg-warning' %> shadow-lg">
   <div class="container pt-4 pb-3 text-white">
     <h1>
-      <% if @alright %>
-        It's all right!
-      <% else %>
-        Something is wrong!
-      <% end %>
+      <%= @message %>
     </h1>
   </div>
 </div>

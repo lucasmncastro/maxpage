@@ -4,6 +4,8 @@ module Maxdog
 
     def initialize
       @metrics = []
+      @success_message = "It's all right!"
+      @warning_message = "Something is wrong!"
     end
 
     # Same method to set and get the title.
@@ -18,6 +20,20 @@ module Maxdog
       return @before_action if block.nil?
 
       @before_action ||= block
+    end
+
+    # Same method to set and get the title.
+    def success_message(message=nil)
+      return @success_message if message.nil?
+
+      @success_message = message
+    end
+
+    # Same method to set and get the title.
+    def warning_message(message=nil)
+      return @warning_message if message.nil?
+
+      @warning_message = message
     end
 
     # Add a metric.

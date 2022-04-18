@@ -9,6 +9,11 @@ module Maxdog
       @metrics = Maxdog.config.metrics
       @metrics.each &:run
       @alright = @metrics.map(&:ok?).all? true
+      if @alright
+        @message = Maxdog.config.success_message
+      else
+        @message = Maxdog.config.warning_message
+      end
     end
 
     protected

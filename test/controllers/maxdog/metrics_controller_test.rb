@@ -55,6 +55,16 @@ module Maxdog
       assert_select 'h1', text: "It's all right!"
     end
 
+    test "should show the custom success message" do
+      Maxdog.setup do
+        success_message 'Tudo certo!'
+        metric("Check PostgreSQL", verify: true) { true }
+        metric("Check MySQL", verify: true) { true }
+      end
+      get metrics_index_url
+      assert_select 'h1', text: "Tudo certo!"
+    end
+
     test "should show alert message if is something wrong" do
       Maxdog.setup do
         metric("Check PostgreSQL", verify: true) { true }
@@ -62,6 +72,16 @@ module Maxdog
       end
       get metrics_index_url
       assert_select 'h1', text: 'Something is wrong!'
+    end
+
+    test "should show the custom warning message" do
+      Maxdog.setup do
+        warning_message 'Alerta!'
+        metric("Check PostgreSQL", verify: true) { true }
+        metric("Check MySQL", verify: true) { false }
+      end
+      get metrics_index_url
+      assert_select 'h1', text: "Alerta!"
     end
 
     test "should run before action callback" do
