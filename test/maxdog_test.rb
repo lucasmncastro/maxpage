@@ -123,4 +123,15 @@ class MaxdogTest < ActiveSupport::TestCase
       end
     end
   end
+
+  test "before_action option" do
+    Maxdog.setup do
+      before_action do
+        'Ok'
+      end
+      metric('Backend health check') { true }
+    end
+
+    assert_equal 'Ok', Maxdog.config.before_action.call
+  end
 end

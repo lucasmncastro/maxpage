@@ -63,5 +63,17 @@ module Maxdog
       get metrics_index_url
       assert_select 'h1', text: 'Something is wrong!'
     end
+
+    test "should run before action callback" do
+      Maxdog.setup do
+        before_action do
+          redirect_to root_path
+        end
+
+        metric("Check PostgreSQL", verify: true) { true }
+      end
+      get metrics_index_url
+      assert_redirected_to root_path
+    end
   end
 end
