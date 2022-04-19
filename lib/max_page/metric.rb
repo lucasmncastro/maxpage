@@ -1,4 +1,4 @@
-module Maxdog
+module MaxPage
   class Metric
     attr_accessor :name, :description, :verify, :block
     attr_reader :value

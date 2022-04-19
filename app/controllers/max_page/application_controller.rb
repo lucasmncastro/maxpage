@@ -1,4 +1,4 @@
-module Maxdog
+module MaxPage
   class ApplicationController < ActionController::Base
   end
 end

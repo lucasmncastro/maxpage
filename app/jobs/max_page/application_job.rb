@@ -1,4 +1,4 @@
-module Maxdog
+module MaxPage
   class ApplicationJob < ActiveJob::Base
   end
 end

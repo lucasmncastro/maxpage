@@ -1,9 +1,9 @@
-require "maxdog/version"
-require "maxdog/engine"
-require "maxdog/configuration"
-require "maxdog/metric"
+require "max_page/version"
+require "max_page/engine"
+require "max_page/configuration"
+require "max_page/metric"
 
-module Maxdog
+module MaxPage
   class << self
     def setup(&block)
       @config = Configuration.new

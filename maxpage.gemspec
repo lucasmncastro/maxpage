@@ -1,11 +1,11 @@
-require_relative "lib/maxdog/version"
+require_relative "lib/max_page/version"
 
 Gem::Specification.new do |spec|
-  spec.name        = "maxdog"
-  spec.version     = Maxdog::VERSION
+  spec.name        = "maxpage"
+  spec.version     = MaxPage::VERSION
   spec.authors     = ["Lucas Castro"]
   spec.email       = ["castro.lucas@gmail.com"]
-  spec.homepage    = "https://github.com/lucasmncastro/maxdog"
+  spec.homepage    = "https://github.com/lucasmncastro/maxpage"
   spec.summary     = "Simplest way to create a usage and status page for your Rails app."
   spec.description = "Max is a Ruby on Rails engine that provides a DLS to sniff and tell you if everything is running well."
   spec.license     = "MIT"
@@ -15,8 +15,8 @@ Gem::Specification.new do |spec|
   # spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/lucasmncastro/maxdog"
-  # spec.metadata["changelog_uri"] = "https://github.com/lucasmncastro/maxdog/CHANGELOG.md"
+  spec.metadata["source_code_uri"] = "https://github.com/lucasmncastro/maxpage"
+  # spec.metadata["changelog_uri"] = "https://github.com/lucasmncastro/maxpage/CHANGELOG.md"
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]

@@ -1,11 +1,11 @@
 require "test_helper"
 
-module Maxdog
+module MaxPage
   class MetricsControllerTest < ActionDispatch::IntegrationTest
     include Engine.routes.url_helpers
 
     def setup
-      Maxdog.setup do
+      MaxPage.setup do
         metric "Health check", verify: true do
           true
         end
@@ -13,7 +13,7 @@ module Maxdog
     end
 
     test "should set page title" do
-      Maxdog.setup do
+      MaxPage.setup do
         title "My page status"
       end
       get metrics_index_url
@@ -31,7 +31,7 @@ module Maxdog
     end
 
     test "should show the metrics description" do
-      Maxdog.setup do
+      MaxPage.setup do
         metric("Health check", description: 'Verify if server is up', verify: true) { true }
       end
       get metrics_index_url
@@ -39,7 +39,7 @@ module Maxdog
     end
 
     test "should show the check icon if verify has passed" do
-      Maxdog.setup do
+      MaxPage.setup do
         metric("Health check", verify: true) { true }
       end
       get metrics_index_url
@@ -47,7 +47,7 @@ module Maxdog
     end
 
     test "should show success message if is all right" do
-      Maxdog.setup do
+      MaxPage.setup do
         metric("Check PostgreSQL", verify: true) { true }
         metric("Check MySQL", verify: true) { true }
       end
@@ -56,7 +56,7 @@ module Maxdog
     end
 
     test "should show the custom success message" do
-      Maxdog.setup do
+      MaxPage.setup do
         success_message 'Tudo certo!'
         metric("Check PostgreSQL", verify: true) { true }
         metric("Check MySQL", verify: true) { true }
@@ -66,7 +66,7 @@ module Maxdog
     end
 
     test "should show alert message if is something wrong" do
-      Maxdog.setup do
+      MaxPage.setup do
         metric("Check PostgreSQL", verify: true) { true }
         metric("Check MySQL", verify: true) { false }
       end
@@ -75,7 +75,7 @@ module Maxdog
     end
 
     test "should show the custom warning message" do
-      Maxdog.setup do
+      MaxPage.setup do
         warning_message 'Alerta!'
         metric("Check PostgreSQL", verify: true) { true }
         metric("Check MySQL", verify: true) { false }
@@ -85,7 +85,7 @@ module Maxdog
     end
 
     test "should run before action callback" do
-      Maxdog.setup do
+      MaxPage.setup do
         before_action do
           redirect_to root_path
         end

@@ -1,4 +1,4 @@
-module Maxdog
+module MaxPage
   class Configuration
     attr_reader :metrics
 

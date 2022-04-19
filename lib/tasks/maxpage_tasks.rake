@@ -1,4 +1,4 @@
 # desc "Explaining what the task does"
-# task :maxdog do
+# task :maxpage do
 #   # Task goes here
 # end

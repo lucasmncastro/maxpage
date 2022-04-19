@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  mount Maxdog::Engine => "/maxdog"
+  mount MaxPage::Engine => "/maxpage"
 end

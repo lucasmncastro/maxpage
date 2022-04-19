@@ -1,4 +1,4 @@
-module Maxdog
+module MaxPage
   module ApplicationHelper
   end
 end
