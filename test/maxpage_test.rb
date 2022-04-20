@@ -148,4 +148,32 @@ class MaxPageTest < ActiveSupport::TestCase
 
     assert_equal 'Ok', MaxPage.config.before_action.call
   end
+
+  test "group option" do
+    MaxPage.setup do
+      group 'Backend' do
+        metric('Backend health check') { true }
+        metric('Database health check') { true }
+      end
+    end
+
+    assert_equal 'Backend', MaxPage.config.groups.first.name
+    assert_equal 'Backend health check', MaxPage.config.groups.first.metrics.first.name
+    assert_equal 'Database health check', MaxPage.config.groups.first.metrics.second.name
+  end
+
+  test "group without title" do
+    MaxPage.setup do
+      metric('Overall speed') { true }
+      group do
+        metric('Backend health check') { true }
+        metric('Database health check') { true }
+      end
+    end
+
+    assert_equal 'Overall speed', MaxPage.config.metrics.first.name
+    assert_nil   MaxPage.config.groups.first.name
+    assert_equal 'Backend health check', MaxPage.config.groups.first.metrics.first.name
+    assert_equal 'Database health check', MaxPage.config.groups.first.metrics.second.name
+  end
 end

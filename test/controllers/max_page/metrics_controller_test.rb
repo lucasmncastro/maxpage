@@ -95,5 +95,30 @@ module MaxPage
       get metrics_index_url
       assert_redirected_to root_path
     end
+
+    test "should render grouped and not grouped metrics" do
+      MaxPage.setup do
+        metric("Test 1", verify: true) { true }
+        metric("Test 2", verify: true) { true }
+
+        group "group A" do
+          metric("Test 3", verify: true) { true }
+          metric("Test 4", verify: true) { true }
+        end
+
+        group "group B" do
+          metric("Test 5", verify: true) { true }
+          metric("Test 6", verify: true) { true }
+        end
+      end
+
+      get metrics_index_url
+      assert_select '.list-group-item', text: "Test 1", count: 1
+      assert_select '.list-group-item', text: "Test 2", count: 1
+      assert_select '.list-group-item', text: "Test 3", count: 1
+      assert_select '.list-group-item', text: "Test 4", count: 1
+      assert_select '.list-group-item', text: "Test 5", count: 1
+      assert_select '.list-group-item', text: "Test 6", count: 1
+    end
   end
 end

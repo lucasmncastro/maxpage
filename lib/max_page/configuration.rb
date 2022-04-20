@@ -1,8 +1,9 @@
 module MaxPage
   class Configuration
-    attr_reader :metrics
+    attr_reader :metrics, :groups
 
     def initialize
+      @groups = []
       @metrics = []
       @success_message = "It's all right!"
       @warning_message = "Something is wrong!"
@@ -44,7 +45,24 @@ module MaxPage
       metric.verify = verify
       metric.block = block
 
+      if @current_group
+        metric.group = @current_group
+        @current_group.metrics << metric
+      end
+
       @metrics << metric
+    end
+
+    def group(name=nil, &block)
+      group = Group.new
+      group.name = name
+      group.metrics = []
+
+      @current_group = group
+      instance_eval(&block)
+      @current_group = nil
+
+      @groups << group
     end
   end
 end

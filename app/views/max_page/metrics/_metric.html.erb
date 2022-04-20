@@ -1,0 +1,23 @@
+<li class="list-group-item">
+  <div class="d-flex justify-content-between align-items-center">
+    <span class="w-100"><%= metric.name %></span>
+
+    <% if metric.verify == true %>
+      <% if metric.verify? %>
+        <% if metric.ok? %>
+          <i class="bi bi-check-circle-fill text-success"></i>
+        <% else %>
+          <i class="bi bi-exclamation-triangle-fill text-warning"></i>
+        <% end %>
+      <% end %>
+    <% else %>
+      <span class="badge text-black <%= (metric.ok? ? 'text-white bg-success' : 'text-white bg-warning') if metric.verify? %>">
+        <%= metric.value %>
+      </span>
+    <% end %>
+  </div>
+
+  <% if metric.description %>
+    <small class="text-muted"><%= metric.description %></small>
+  <% end %>
+</li>

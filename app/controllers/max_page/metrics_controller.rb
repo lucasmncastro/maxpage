@@ -14,6 +14,8 @@ module MaxPage
       else
         @message = MaxPage.config.warning_message
       end
+      @metrics_without_group = @metrics.reject(&:group)
+      @groups = MaxPage.config.groups
     end
 
     protected

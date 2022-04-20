@@ -1,6 +1,6 @@
 module MaxPage
   class Metric
-    attr_accessor :name, :description, :verify, :block
+    attr_accessor :name, :description, :verify, :group, :block
     attr_reader :value
 
     def run
