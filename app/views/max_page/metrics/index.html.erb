@@ -1,34 +1,47 @@
-<div class="<%= @alright ? 'bg-success' : 'bg-warning' %> shadow-lg">
-  <div class="container pt-4 pb-3 text-white">
-    <h1>
-      <%= @message %>
-    </h1>
+<% if @metrics.blank? %>
+  <div class="bg-dark shadow-lg">
+    <div class="container pt-4 pb-3 text-white">
+      <h1>
+        Almost there!
+      </h1>
+    </div>
   </div>
-</div>
-
-<div class="container mt-4">
-  <% if @metrics_without_group.any? %>
-    <div class="card card-default mb-3">
-      <ul class="list-group list-group-flush">
-        <% @metrics_without_group.each do |metric| %>
-          <%= render 'metric', metric: metric %>
-        <% end %>
-      </ul>
+  <div class="container mt-4">
+    You need to set up the metrics. Go to the <a href="https://github.com/lucasmncastro/maxpage" target="blank">README</a> to more informations.
+  </div>
+<% else %>
+  <div class="<%= @alright ? 'bg-success' : 'bg-warning' %> shadow-lg">
+    <div class="container pt-4 pb-3 text-white">
+      <h1>
+        <%= @message %>
+      </h1>
     </div>
-  <% end %>
-  <% @groups.each do |group| %>
-    <div class="card card-default mb-3">
-      <div class="card-header">
-        <%= group.name %>
+  </div>
+  
+  <div class="container mt-4">
+    <% if @metrics_without_group.any? %>
+      <div class="card card-default mb-3">
+        <ul class="list-group list-group-flush">
+          <% @metrics_without_group.each do |metric| %>
+            <%= render 'metric', metric: metric %>
+          <% end %>
+        </ul>
       </div>
-      <ul class="list-group list-group-flush">
-        <% group.metrics.each do |metric| %>
-          <%= render 'metric', metric: metric %>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+    <% @groups.each do |group| %>
+      <div class="card card-default mb-3">
+        <div class="card-header">
+          <%= group.name %>
+        </div>
+        <ul class="list-group list-group-flush">
+          <% group.metrics.each do |metric| %>
+            <%= render 'metric', metric: metric %>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+<% end %>
 
 <style>
   body { background: #f6f8fa; }

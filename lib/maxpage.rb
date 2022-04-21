@@ -12,7 +12,7 @@ module MaxPage
     end
 
     def config
-      @config
+      @config ||= Configuration.new
     end
   end
 end
