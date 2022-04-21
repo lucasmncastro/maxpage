@@ -7,13 +7,15 @@
 </div>
 
 <div class="container mt-4">
-  <div class="card card-default mb-3">
-    <ul class="list-group list-group-flush">
-      <% @metrics_without_group.each do |metric| %>
-        <%= render 'metric', metric: metric %>
-      <% end %>
-    </ul>
-  </div>
+  <% if @metrics_without_group.any? %>
+    <div class="card card-default mb-3">
+      <ul class="list-group list-group-flush">
+        <% @metrics_without_group.each do |metric| %>
+          <%= render 'metric', metric: metric %>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <% @groups.each do |group| %>
     <div class="card card-default mb-3">
       <div class="card-header">

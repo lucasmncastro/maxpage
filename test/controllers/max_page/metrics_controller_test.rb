@@ -120,5 +120,22 @@ module MaxPage
       assert_select '.list-group-item', text: "Test 5", count: 1
       assert_select '.list-group-item', text: "Test 6", count: 1
     end
+
+    test "should not render list-group when there is no grouped metrics" do
+      MaxPage.setup do
+        group "group A" do
+          metric("Test 3", verify: true) { true }
+          metric("Test 4", verify: true) { true }
+        end
+
+        group "group B" do
+          metric("Test 5", verify: true) { true }
+          metric("Test 6", verify: true) { true }
+        end
+      end
+
+      get metrics_index_url
+      assert_select '.list-group', count: 2
+    end
   end
 end
