@@ -64,5 +64,27 @@ module MaxPage
 
       @groups << group
     end
+
+    # Same method to set and get the email recipient.
+    def email_to(email=nil)
+      return @email_to || ENV['MAXPAGE_EMAIL_TO'] if email.nil?
+
+      @email_to = email
+    end
+
+    # Same method to set and get the email sender.
+    def email_from(email=nil)
+      return @email_from || ENV['MAXPAGE_EMAIL_FROM'] || 'noreply@maxpage.local' if email.nil?
+
+      @email_from = email
+    end
+
+    # Same method to set and get when to send email.
+    # Options: :always, :only_failures, :never
+    def email_send_on(symbol=nil)
+      return @email_send_on || :only_failures if symbol.nil?
+
+      @email_send_on = symbol
+    end
   end
 end

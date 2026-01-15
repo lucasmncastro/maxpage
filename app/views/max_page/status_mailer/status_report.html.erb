@@ -1,0 +1,66 @@
+<div class="header">
+  <h1><%= @status_message %></h1>
+  <% if @title %>
+    <p style="margin: 8px 0 0 0; opacity: 0.9;"><%= @title %></p>
+  <% end %>
+</div>
+
+<div class="content">
+  <% if @failed_metrics.empty? && @failed_groups.empty? %>
+    <p>All metrics are operating normally. No issues detected.</p>
+  <% else %>
+    <p>The following metrics require attention:</p>
+
+    <% if @failed_metrics.any? %>
+      <% @failed_metrics.each do |metric| %>
+        <div class="metric-item">
+          <div class="metric-name"><%= metric.name %></div>
+          <div class="metric-value">
+            Current value: <%= metric.value %>
+            <% if metric.verify.is_a?(Hash) %>
+              <% if metric.verify[:min] && metric.value.to_i < metric.verify[:min] %>
+                (Minimum required: <%= metric.verify[:min] %>)
+              <% elsif metric.verify[:max] && metric.value.to_i > metric.verify[:max] %>
+                (Maximum allowed: <%= metric.verify[:max] %>)
+              <% end %>
+            <% elsif metric.verify != true %>
+              (Expected: <%= metric.verify %>)
+            <% end %>
+          </div>
+          <% if metric.description %>
+            <div class="metric-description"><%= metric.description %></div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <% @failed_groups.each do |group| %>
+      <div class="group-header"><%= group[:name] %></div>
+      <% group[:metrics].each do |metric| %>
+        <div class="metric-item">
+          <div class="metric-name"><%= metric.name %></div>
+          <div class="metric-value">
+            Current value: <%= metric.value %>
+            <% if metric.verify.is_a?(Hash) %>
+              <% if metric.verify[:min] && metric.value.to_i < metric.verify[:min] %>
+                (Minimum required: <%= metric.verify[:min] %>)
+              <% elsif metric.verify[:max] && metric.value.to_i > metric.verify[:max] %>
+                (Maximum allowed: <%= metric.verify[:max] %>)
+              <% end %>
+            <% elsif metric.verify != true %>
+              (Expected: <%= metric.verify %>)
+            <% end %>
+          </div>
+          <% if metric.description %>
+            <div class="metric-description"><%= metric.description %></div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="footer">
+  <p>This is an automated status report from MaxPage.</p>
+  <p>Generated at <%= Time.current.strftime('%Y-%m-%d %H:%M:%S %Z') %></p>
+</div>

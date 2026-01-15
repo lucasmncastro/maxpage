@@ -115,7 +115,7 @@ Remember that the `verify` is not a required option, therefore if it is not defi
 We can change these messages. In the following code I translated them to Portuguese:
 
 ```ruby
-StatusPage.setup do
+MaxPage.setup do
   success_message 'Tudo certo!'
   warning_message 'Ops, tem algo de errado.'
 
@@ -173,6 +173,84 @@ end
 
 The `before_action` block will be evaluated in `before_action` callback, using the controller scope.
 This is why you can use methods like `authenticate_<resource_name>!` from [Devise](https://github.com/heartcombo/devise) and `authorize` from [Pundit](https://github.com/varvet/pundit).
+
+### Email notifications
+
+MaxPage can send email notifications with the status of your metrics. This is useful for automated monitoring and alerting.
+
+#### Configuration
+
+Configure email settings in your initializer:
+
+```ruby
+MaxPage.setup do
+  email_to 'admin@example.com'                    # Recipient email (required)
+  email_from 'noreply@example.com'                # Sender email (optional, defaults to 'noreply@maxpage.local')
+  email_send_on :only_failures                    # When to send: :always, :only_failures, or :never
+  
+  metric 'Users registered last 24h', verify: { min: 20 } do
+    User.where("created_at > ?", 24.hours.ago).count
+  end
+end
+```
+
+**Email configuration options:**
+
+- `email_to(email)` - Sets the recipient email address. You can also use the `MAXPAGE_EMAIL_TO` environment variable.
+- `email_from(email)` - Sets the sender email address. You can also use the `MAXPAGE_EMAIL_FROM` environment variable. Defaults to `'noreply@maxpage.local'`.
+- `email_send_on(symbol)` - Controls when emails are sent:
+  - `:always` - Send email every time the task runs, regardless of metric status
+  - `:only_failures` - Send email only when there are metrics with problems (default)
+  - `:never` - Never send emails
+
+#### Using environment variables
+
+You can also configure email settings using environment variables:
+
+```bash
+export MAXPAGE_EMAIL_TO="admin@example.com"
+export MAXPAGE_EMAIL_FROM="noreply@example.com"
+```
+
+#### Running the status check
+
+Use the rake task to check all metrics and send email notifications:
+
+```bash
+rake maxpage:check
+```
+
+The task will:
+1. Execute all configured metrics
+2. Identify metrics with problems (those with `verify` that are not `ok?`)
+3. Send an email (if configured) based on the `email_send_on` setting
+4. Display a summary in the console
+
+**Email content:**
+
+The email will contain:
+- Overall status (success or warning message)
+- List of only the metrics that have problems (failed verifications)
+- For each failed metric: name, current value, description (if available), and which rule failed
+- Metrics are grouped by their groups (if applicable)
+
+**Scheduling the check:**
+
+You can schedule the rake task to run automatically using cron or a job scheduler like [whenever](https://github.com/javan/whener):
+
+```ruby
+# config/schedule.rb (whenever gem)
+every 1.hour do
+  rake "maxpage:check"
+end
+```
+
+Or with cron:
+
+```bash
+# Run every hour
+0 * * * * cd /path/to/app && bundle exec rake maxpage:check RAILS_ENV=production
+```
 
 ## Examples
 

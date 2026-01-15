@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f6f8fa;
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        overflow: hidden;
+      }
+      .header {
+        padding: 20px;
+        background-color: <%= @all_ok ? '#28a745' : '#ffc107' %>;
+        color: white;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 24px;
+      }
+      .content {
+        padding: 20px;
+      }
+      .metric-item {
+        padding: 12px;
+        border-bottom: 1px solid #e9ecef;
+      }
+      .metric-item:last-child {
+        border-bottom: none;
+      }
+      .metric-name {
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .metric-value {
+        color: #dc3545;
+        font-size: 18px;
+        margin: 4px 0;
+      }
+      .metric-description {
+        color: #6c757d;
+        font-size: 14px;
+        margin-top: 4px;
+      }
+      .group-header {
+        background-color: #f8f9fa;
+        padding: 12px;
+        font-weight: 600;
+        border-top: 2px solid #dee2e6;
+        margin-top: 20px;
+      }
+      .group-header:first-child {
+        margin-top: 0;
+      }
+      .footer {
+        padding: 20px;
+        text-align: center;
+        color: #6c757d;
+        font-size: 12px;
+        border-top: 1px solid #e9ecef;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
+</html>

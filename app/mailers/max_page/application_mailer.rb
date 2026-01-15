@@ -1,6 +1,6 @@
 module MaxPage
   class ApplicationMailer < ActionMailer::Base
-    default from: "from@example.com"
-    layout "mailer"
+    default from: -> { MaxPage.config.email_from }
+    layout "max_page/mailer"
   end
 end
