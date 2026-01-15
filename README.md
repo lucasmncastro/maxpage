@@ -70,7 +70,7 @@ end
 
 In the above code we have a metric named "User registered last 24h", with a block code that count in the database the users registed last 24h, using `ActiveRecord`.
 
-__⚠️ Important:__ As our configuration is under `config/initializers` folder we __MUST__ restart the Rails server to see the changes. Soon we're going to move the setup code to the `app` directory and eliminate the need of restarting. Work in progress.
+__⚠️ Important:__ The configuration is automatically loaded after Rails initialization, so you can safely use your models and application code in the metric blocks. However, as with any initializer, you __MUST__ restart the Rails server to see changes after modifying the configuration file.
 
 ### The option `verify`
 
