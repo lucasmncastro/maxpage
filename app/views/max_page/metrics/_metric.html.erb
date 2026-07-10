@@ -12,7 +12,7 @@
       <% end %>
     <% else %>
       <span class="badge text-black <%= (metric.ok? ? 'text-white bg-success' : 'text-white bg-warning') if metric.verify? %>">
-        <%= metric.value %>
+        <%= format_metric_value(metric.value) %>
       </span>
     <% end %>
   </div>
