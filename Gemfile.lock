@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    maxpage (0.1.0)
+    maxpage (0.3.0)
       rails (>= 5.0)
 
 GEM
