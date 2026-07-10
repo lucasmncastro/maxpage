@@ -16,15 +16,15 @@
         <div class="metric-item">
           <div class="metric-name"><%= metric.name %></div>
           <div class="metric-value">
-            Current value: <%= metric.value %>
+            Current value: <%= format_metric_value(metric.value) %>
             <% if metric.verify.is_a?(Hash) %>
               <% if metric.verify[:min] && metric.value.to_i < metric.verify[:min] %>
-                (Minimum required: <%= metric.verify[:min] %>)
+                (Minimum required: <%= format_metric_value(metric.verify[:min]) %>)
               <% elsif metric.verify[:max] && metric.value.to_i > metric.verify[:max] %>
-                (Maximum allowed: <%= metric.verify[:max] %>)
+                (Maximum allowed: <%= format_metric_value(metric.verify[:max]) %>)
               <% end %>
             <% elsif metric.verify != true %>
-              (Expected: <%= metric.verify %>)
+              (Expected: <%= format_metric_value(metric.verify) %>)
             <% end %>
           </div>
           <% if metric.description %>
@@ -40,15 +40,15 @@
         <div class="metric-item">
           <div class="metric-name"><%= metric.name %></div>
           <div class="metric-value">
-            Current value: <%= metric.value %>
+            Current value: <%= format_metric_value(metric.value) %>
             <% if metric.verify.is_a?(Hash) %>
               <% if metric.verify[:min] && metric.value.to_i < metric.verify[:min] %>
-                (Minimum required: <%= metric.verify[:min] %>)
+                (Minimum required: <%= format_metric_value(metric.verify[:min]) %>)
               <% elsif metric.verify[:max] && metric.value.to_i > metric.verify[:max] %>
-                (Maximum allowed: <%= metric.verify[:max] %>)
+                (Maximum allowed: <%= format_metric_value(metric.verify[:max]) %>)
               <% end %>
             <% elsif metric.verify != true %>
-              (Expected: <%= metric.verify %>)
+              (Expected: <%= format_metric_value(metric.verify) %>)
             <% end %>
           </div>
           <% if metric.description %>
